@@ -18,18 +18,18 @@ async function main() {
     processor.registerCommand(pingCommand.name, pingCommand);
     processor.registerCommand(echoCommand.name, echoCommand);
 
-    // Initialize Telegram Adapter if token is provided
+    // Initialize Telegram Adapter if a valid token is provided
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-    if (telegramToken) {
+    if (telegramToken && telegramToken !== 'your_telegram_bot_token_here') {
         console.log('Initializing Telegram Adapter...');
         new TelegramAdapter(telegramToken, processor);
     } else {
         console.warn('TELEGRAM_BOT_TOKEN not found in .env, skipping Telegram adapter.');
     }
 
-    // Initialize Discord Adapter if token is provided
+    // Initialize Discord Adapter if a valid token is provided
     const discordToken = process.env.DISCORD_BOT_TOKEN;
-    if (discordToken) {
+    if (discordToken && discordToken !== 'your_discord_bot_token_here') {
         console.log('Initializing Discord Adapter...');
         const discordAdapter = new DiscordAdapter(discordToken, processor);
         discordAdapter.start();
